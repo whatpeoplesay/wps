@@ -7,11 +7,11 @@ no forms, no data collection.
 
 ## Structure
 - `index.html` - homepage (header, hero 2-column on desktop, hero-side stack,
-  text-only cards, US / World / Politics / Business / Technology / Culture
-  sections each 1 large + 2-3 small, Most Read side rail on desktop,
-  Recommended Audio, footer)
+  text-only cards, US / World / Politics / Business / Technology / Culture /
+  Sports / Health / Travel sections each 1 large + 2-3 small, Most Read side
+  rail on desktop, Recommended Audio, footer)
 - `articles/` - one HTML file per story, e.g. `articles/2026-10-16-slug.html`.
-  Template: `articles/sample.html`
+  Canonical template: `articles/sample.html` (see "Article page template").
 - `images/` - article images, compressed. Naming: `YYYY-MM-DD-slug-01.jpg`
 - `assets/css/style.css` - all styles, mobile-first responsive.
   Mobile: single-column vertical. Desktop (>= 760px): hero 2-column,
@@ -20,19 +20,33 @@ no forms, no data collection.
   for previewing/sharing. Regenerate after any homepage/CSS change:
   see "Regenerate preview" below.
 
-## Article pattern
-Headline, image, date/source, body in own words (facts only, no copy,
-no personal commentary), then a `What People Say` box with the top 4-5
-real most-engaged comments (platform + name + likes + source link).
-No invented comments. No hateful/abusive comments.
+## Article page template (canonical order, every article follows this)
+1. Header/nav (same as homepage) + skip link + `<main>`
+2. `<article>`: headline as the single `<h1>`, then a 1-2 line standfirst
+3. `<figure>`: image placeholder (or real image) + `<figcaption>` caption + credit
+4. Date + source line: `<time datetime>` + section label + byline, then
+   `Source: [name + link]` (no dead `#` links)
+5. News body: 4-6 paragraphs, serif, in WPS's own words (facts only, no copy,
+   no personal commentary)
+6. `What People Say` box: 4-5 real most-engaged public comments, each with
+   platform + name + engagement + source link. No invented comments.
+   No hateful/abusive comments.
+7. Related: 3 links to other real article pages, link text = target headline
+8. Footer (same as homepage, full category list)
+
+`articles/sample.html` is the canonical template. Its HTML comments mark
+every place to replace for a new real article (headline, standfirst, image,
+date, source, body, comments, Related). Layout-sample pages use placeholder
+text and placeholder comment cards, clearly marked as placeholders.
 
 ## How to add a new article
 1. Copy `articles/sample.html` to `articles/YYYY-MM-DD-slug.html`.
-2. Replace: headline, `<time datetime>`, section, byline, source line,
-   image placeholder with a real compressed image from `images/`,
-   body paragraphs (own words), and the 4 comments with real comments
-   (platform + name + likes + source link). Keep the Related links
-   pointing at real articles, or at `sample.html` while drafting.
+2. Fill in every TEMPLATE comment in order: headline (also `<title>` and
+   OG title), standfirst, image (replace the placeholder with a real
+   compressed image from `images/` + caption + credit), `<time datetime>`,
+   section, source line, 4-6 body paragraphs (own words), 4-5 real comments
+   (platform + name + engagement + source link), and 3 Related links to
+   real articles (link text = target headline).
 3. On `index.html`, add a card linking to the new file: hero, hero-side,
    a section card, or Most Read. Every homepage card must link to a
    real article file. Update the section "See more" links as needed.
@@ -54,6 +68,6 @@ Colors: Black #000000, White #FFFFFF, grey for meta only (#555, #e5e5e5, #f5f5f5
 Fonts: Headlines/UI bold sans-serif (Arial/Helvetica), article body serif (Georgia).
 
 ## Hosting
-Free: GitHub Pages (repo + Pages setup pending - token scope blocked
-2026-10-16, see project notes).
+Live: https://whatpeoplesay.github.io/wps/ (GitHub Pages, repo
+`whatpeoplesay/wps`, branch `main`, folder `/`).
 Local: open `index.html` in a browser, or serve with `python3 -m http.server`.

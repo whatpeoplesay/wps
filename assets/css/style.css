@@ -381,6 +381,7 @@ a:hover { text-decoration: underline; }
   line-height: 1.15;
   margin: 12px 0 10px;
 }
+.article .standfirst { font-family: Georgia, "Times New Roman", serif; font-size: 19px; line-height: 1.5; font-weight: 700; margin: 0 0 12px; }
 .article .byline { font-weight: 700; font-size: 14px; margin: 8px 0; }
 .article .source-note { font-size: 13px; color: var(--meta); margin: 8px 0; }
 .article figure { margin: 12px 0; }
