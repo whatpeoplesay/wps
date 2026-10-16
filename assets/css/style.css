@@ -451,3 +451,14 @@ img.hero-img {
   body { background: var(--white); color: var(--black); }
   a { text-decoration: none; }
 }
+
+/* Card thumbnails: one image file per article, same file everywhere it appears. */
+img.side-thumb-img { flex: 0 0 38%; width: 38%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+img.featured-thumb-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; }
+img.small-thumb-img { flex: 0 0 100px; width: 100px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+img.audio-thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; padding: 0; }
+.most-read li a { display: flex; gap: 10px; align-items: flex-start; }
+img.mostread-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+.related li a { display: flex; gap: 10px; align-items: flex-start; }
+img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+@media (min-width: 760px) { img.side-thumb-img { flex-basis: 96px; width: 96px; } }
