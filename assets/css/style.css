@@ -443,3 +443,10 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
 
 /* Category pages: same side limits as the article page (760px, centered). */
 .category-page { max-width: 760px; margin: 0 auto; padding: 18px 14px 32px; }
+
+/* Platform icons on comment source links + See translation. */
+.wps-comment-link { display: inline-flex; align-items: center; gap: 6px; }
+.platform-icon { width: 14px; height: 14px; flex: none; }
+.wps-translation { margin-top: 6px; font-size: 13px; color: var(--meta); }
+.wps-translation summary { cursor: pointer; font-weight: 700; }
+.wps-translation-text { margin-top: 4px; }
