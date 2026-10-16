@@ -10,7 +10,7 @@
 // No data is collected, no network calls.
 (function () {
   var INTERVAL = 5000;
-  var FADE_MS = 500;
+  var FADE_MS = 250;
   var MAX_POOL = 10;
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -140,6 +140,7 @@
       current = (idx + pool.length) % pool.length;
       if (reduceMotion) {
         writeHero(link, pool[current]);
+        afterImageSwap();
         return;
       }
       fading = true;
@@ -148,6 +149,7 @@
         writeHero(link, pool[current]);
         link.style.opacity = '';
         fading = false;
+        afterImageSwap();
       }, FADE_MS);
     }
     function next() { show(current + 1); }
@@ -191,6 +193,24 @@
       return b;
     }
 
+    // Arrows stay fixed: anchor them to the vertical center of the hero IMAGE,
+    // not to the section (section height changes with each story's title /
+    // summary length, which made the arrows drift up and down). All hero
+    // images are 16:9, so the image center is the same for every story.
+    function placeArrows() {
+      var img = link.querySelector('img');
+      if (!img || !img.offsetHeight) return;
+      var top = img.offsetTop + img.offsetHeight / 2;
+      prevBtn.style.top = top + 'px';
+      nextBtn.style.top = top + 'px';
+    }
+    function afterImageSwap() {
+      var img = link.querySelector('img');
+      if (!img) return;
+      if (img.complete) placeArrows();
+      else img.onload = placeArrows;
+    }
+
     heroSection.style.position = 'relative';
     var prevBtn = makeBtn('Previous story', 'prev', '\u2039');
     var nextBtn = makeBtn('Next story', 'next', '\u203A');
@@ -202,6 +222,8 @@
     heroSection.addEventListener('mouseleave', function () { paused = false; });
     heroSection.addEventListener('focusin', function () { paused = true; });
     heroSection.addEventListener('focusout', function () { paused = false; });
+    window.addEventListener('resize', placeArrows);
+    afterImageSwap();
     start();
   }
 
