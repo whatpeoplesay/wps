@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'unsafe-inline'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YK81QRLXD"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9YK81QRLXD');</script>
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="index, follow">
   <title>Sports story three - WPS - What People Say</title>
@@ -126,7 +128,7 @@
         <a href="../#travel">Travel</a>
       </nav>
       <p class="footer-legal">
-        <span>Privacy Policy</span>
+        <a href="../privacy.html">Privacy Policy</a>
         <span>Terms of Use</span>
       </p>
     </div>
