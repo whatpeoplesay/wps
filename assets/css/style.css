@@ -4,7 +4,7 @@
    requests, no trackers, no web fonts.
    Mobile-first, BBC-style. Order below follows page order:
    tokens -> base -> utilities -> header -> ads -> hero -> text-only ->
-   rail layout -> sections -> audio -> footer -> article -> desktop -> print
+   rail layout -> sections -> footer -> article -> desktop -> print
    ========================================================================== */
 
 /* ---------- 1. Tokens (black / white family only) ---------- */
@@ -162,8 +162,7 @@ a:hover { text-decoration: underline; }
 .hero { padding: 16px 0 8px; border-bottom: 1px solid var(--black); }
 
 .hero-img,
-.featured-thumb,
-.audio-thumb {
+.featured-thumb {
   width: 100%;
   aspect-ratio: 16 / 9;
   background: var(--placeholder);
@@ -333,31 +332,6 @@ img.hero-img {
   line-height: 1.3;
 }
 
-/* ---------- 11. Recommended Audio (horizontal scroll) ---------- */
-.audio-scroll {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 8px;
-}
-.audio-card { flex: 0 0 78%; scroll-snap-align: start; display: block; min-width: 0; }
-.audio-thumb { margin-bottom: 8px; }
-.audio-show { font-size: 13px; color: var(--meta); }
-.audio-card h3 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  line-height: 1.3;
-  margin: 4px 0 8px;
-}
-.save-row { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--meta); }
-.save-label {
-  border: 1px solid var(--black);
-  background: var(--white);
-  padding: 4px 10px;
-  font-size: 13px;
-}
-
 /* ---------- 12. Footer ---------- */
 .site-footer { background: var(--black); color: var(--white); margin-top: 24px; padding: 28px 14px; }
 .site-footer .inner { max-width: 1200px; margin: 0 auto; }
@@ -455,13 +429,12 @@ img.hero-img {
   .section-grid { grid-template-columns: 1.3fr 1fr; align-items: start; }
   .featured-card h3 { font-size: 24px; }
 
-  .audio-card { flex-basis: 38%; }
 }
 
 /* ---------- 15. Print ---------- */
 @media print {
   .site-header { position: static; }
-  .main-nav, .ad-block, .audio-scroll, .save-label { display: none; }
+  .main-nav, .ad-block { display: none; }
   body { background: var(--white); color: var(--black); }
   a { text-decoration: none; }
 }
@@ -470,7 +443,6 @@ img.hero-img {
 img.side-thumb-img { flex: 0 0 38%; width: 38%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 img.featured-thumb-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; }
 img.small-thumb-img { flex: 0 0 100px; width: 100px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
-img.audio-thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; padding: 0; }
 .most-read li a { display: flex; gap: 10px; align-items: flex-start; }
 img.mostread-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 .related li a { display: flex; gap: 10px; align-items: flex-start; }
