@@ -190,46 +190,6 @@ img.hero-img {
 }
 .hero p { font-size: 16px; color: var(--ink); margin-bottom: 8px; }
 
-/* Hero side stack: 4 compact stories on desktop, stacked on mobile. */
-.hero-side { padding: 14px 0; display: grid; gap: 0; }
-
-.side-card {
-  display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--hair);
-  align-items: flex-start;
-  min-width: 0;
-}
-.side-thumb {
-  flex: 0 0 38%;
-  aspect-ratio: 16 / 10;
-  background: var(--placeholder);
-  color: var(--placeholder-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  position: relative;
-}
-.side-thumb.video::after {
-  content: "\25B6";
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 12px;
-  padding: 4px 8px;
-}
-.side-body { flex: 1; min-width: 0; }
-.side-title {
-  display: block;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  line-height: 1.25;
-  margin-bottom: 6px;
-}
 
 /* ---------- 7. Text-only cards ---------- */
 .text-only-list { padding: 0; }
@@ -248,8 +208,6 @@ img.hero-img {
 }
 .text-only p { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
 
-/* ---------- 8. Rail layout (Most Read side rail on desktop) ---------- */
-.layout-with-rail { display: grid; gap: 0; }
 
 /* ---------- 9. Sections: 1 large + 2-3 small ---------- */
 .section { padding: 18px 0; }
@@ -415,14 +373,10 @@ img.hero-img {
 @media (min-width: 760px) {
   .hero h1 { font-size: 44px; }
 
-  /* Desktop hero: large left + 4 small right stack. */
+  /* Desktop hero: large left + Most Read rail right. */
   .hero-layout { grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
   .hero { border-bottom: 0; }
-  .hero-side { padding-top: 16px; }
-  .side-thumb { flex-basis: 96px; }
 
-  /* Desktop rail: content left, Most Read rail right. */
-  .layout-with-rail { grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
   .most-read { position: sticky; top: 110px; }
 
   /* Desktop sections: 1 large left + small stack right. */
@@ -440,14 +394,12 @@ img.hero-img {
 }
 
 /* Card thumbnails: one image file per article, same file everywhere it appears. */
-img.side-thumb-img { flex: 0 0 38%; width: 38%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 img.featured-thumb-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; }
 img.small-thumb-img { flex: 0 0 100px; width: 100px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 .most-read li a { display: flex; gap: 10px; align-items: flex-start; }
 img.mostread-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 .related li a { display: flex; gap: 10px; align-items: flex-start; }
 img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
-@media (min-width: 760px) { img.side-thumb-img { flex-basis: 96px; width: 96px; } }
 
 /* ---------- Read More: first paragraph visible, rest inside details ---------- */
 .wps-read-more { margin: 0 0 16px; }

@@ -205,46 +205,6 @@ img.hero-img {
 }
 .hero p { font-size: 16px; color: var(--ink); margin-bottom: 8px; }
 
-/* Hero side stack: 4 compact stories on desktop, stacked on mobile. */
-.hero-side { padding: 14px 0; display: grid; gap: 0; }
-
-.side-card {
-  display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--hair);
-  align-items: flex-start;
-  min-width: 0;
-}
-.side-thumb {
-  flex: 0 0 38%;
-  aspect-ratio: 16 / 10;
-  background: var(--placeholder);
-  color: var(--placeholder-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  position: relative;
-}
-.side-thumb.video::after {
-  content: "\25B6";
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 12px;
-  padding: 4px 8px;
-}
-.side-body { flex: 1; min-width: 0; }
-.side-title {
-  display: block;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  line-height: 1.25;
-  margin-bottom: 6px;
-}
 
 /* ---------- 7. Text-only cards ---------- */
 .text-only-list { padding: 0; }
@@ -263,8 +223,6 @@ img.hero-img {
 }
 .text-only p { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
 
-/* ---------- 8. Rail layout (Most Read side rail on desktop) ---------- */
-.layout-with-rail { display: grid; gap: 0; }
 
 /* ---------- 9. Sections: 1 large + 2-3 small ---------- */
 .section { padding: 18px 0; }
@@ -430,14 +388,10 @@ img.hero-img {
 @media (min-width: 760px) {
   .hero h1 { font-size: 44px; }
 
-  /* Desktop hero: large left + 4 small right stack. */
+  /* Desktop hero: large left + Most Read rail right. */
   .hero-layout { grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
   .hero { border-bottom: 0; }
-  .hero-side { padding-top: 16px; }
-  .side-thumb { flex-basis: 96px; }
 
-  /* Desktop rail: content left, Most Read rail right. */
-  .layout-with-rail { grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
   .most-read { position: sticky; top: 110px; }
 
   /* Desktop sections: 1 large left + small stack right. */
@@ -455,14 +409,12 @@ img.hero-img {
 }
 
 /* Card thumbnails: one image file per article, same file everywhere it appears. */
-img.side-thumb-img { flex: 0 0 38%; width: 38%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 img.featured-thumb-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; }
 img.small-thumb-img { flex: 0 0 100px; width: 100px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 .most-read li a { display: flex; gap: 10px; align-items: flex-start; }
 img.mostread-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 .related li a { display: flex; gap: 10px; align-items: flex-start; }
 img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
-@media (min-width: 760px) { img.side-thumb-img { flex-basis: 96px; width: 96px; } }
 
 /* ---------- Read More: first paragraph visible, rest inside details ---------- */
 .wps-read-more { margin: 0 0 16px; }
@@ -560,31 +512,37 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
         </a>
       </section>
 
-      <aside class="hero-side" aria-label="More top stories">
-        <a class="side-card" href="articles/hero-1.html"><img class="side-thumb-img" src="images/hero-1.jpg" alt="TV news camera crew filming outdoors on a city street in overcast daylight">
-          <span class="side-body">
-            <span class="side-title">Video: How the top story unfolded, in two minutes</span>
-            <span class="meta"><span>3 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
-          </span>
-        </a>
-        <a class="side-card" href="articles/hero-2.html"><img class="side-thumb-img" src="images/hero-2.jpg" alt="Empty press briefing room with a podium, rows of flags, and daylight through windows">
-          <span class="side-body">
-            <span class="side-title">Second major story of the day</span>
-            <span class="meta"><span>4 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
-          </span>
-        </a>
-        <a class="side-card" href="articles/hero-3.html"><img class="side-thumb-img" src="images/hero-3.jpg" alt="City street newsstand with stacked newspapers and pedestrians walking past in morning light">
-          <span class="side-body">
-            <span class="side-title">Third story: what happened and why it matters</span>
-            <span class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
-          </span>
-        </a>
-        <a class="side-card" href="articles/hero-4.html"><img class="side-thumb-img" src="images/hero-4.jpg" alt="Newsroom desk with a globe and printed world maps, monitors blurred in the background">
-          <span class="side-body">
-            <span class="side-title">Fourth story from the international desk</span>
-            <span class="meta"><span>6 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
-          </span>
-        </a>
+      <!-- MOST READ: right rail, stays here -->
+      <aside class="most-read" aria-labelledby="most-read-title">
+        <div class="section-header">
+          <h2 id="most-read-title">Most Read</h2>
+        </div>
+                <ol>
+          <li>
+            <a href="articles/2026-10-16-us-oregon-school-shooting.html"><img class="mostread-thumb-img" src="images/2026-10-16-us-oregon-school-shooting.jpg" alt="A small elementary school building among pine trees in Oregon, with yellow police tape at a distance under an overcast sky">
+              <h3>3 children and a teacher were killed in Oregon elementary school shooting, police say. The teen shooter is also dead</h3>
+              <span class="meta"><span>US</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/2026-10-16-world-eu-summit-zelenskyy.html"><img class="mostread-thumb-img" src="images/2026-10-16-world-eu-summit-zelenskyy.jpg" alt="A modern European government building in Brussels with a row of plain blue flags outside and people in suits walking across a wide plaza">
+              <h3>EU leaders back Zelenskyy at Brussels summit as US pressure grows</h3>
+              <span class="meta"><span>World</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/2026-10-16-politics-gop-voting-restrictions.html"><img class="mostread-thumb-img" src="images/2026-10-16-politics-gop-voting-restrictions.jpg" alt="Voters waiting in line outside a brick polling place with a US flag on a clear morning">
+              <h3>GOP-led states have made it harder to vote before the midterms</h3>
+              <span class="meta"><span>Politics</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/2026-10-16-business-coreweave-ai-debt.html"><img class="mostread-thumb-img" src="images/2026-10-16-business-coreweave-ai-debt.jpg" alt="A long corridor in a data center with rows of server racks and small indicator lights">
+              <h3>Cost to insure CoreWeave debt jumps past 1,000 points as AI debt worries grow</h3>
+              <span class="meta"><span>Business</span></span>
+            </a>
+          </li>
+        </ol>
       </aside>
     </div>
 
@@ -607,9 +565,6 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
       <div class="ad-box">Advertisement placeholder</div>
     </div>
 
-    <!-- CONTENT + MOST READ RAIL: mobile stacked; desktop content left + rail right -->
-    <div class="layout-with-rail">
-      <div class="content-main">
 
         <!-- US SECTION: 1 large + 3 small -->
         <section class="section" id="us" aria-labelledby="us-title">
@@ -975,41 +930,6 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
             </div>
           </div>
         </section>
-      </div>
-
-      <!-- MOST READ: numbered list; side rail on desktop -->
-      <aside class="most-read" aria-labelledby="most-read-title">
-        <div class="section-header">
-          <h2 id="most-read-title">Most Read</h2>
-        </div>
-                <ol>
-          <li>
-            <a href="articles/2026-10-16-us-oregon-school-shooting.html"><img class="mostread-thumb-img" src="images/2026-10-16-us-oregon-school-shooting.jpg" alt="A small elementary school building among pine trees in Oregon, with yellow police tape at a distance under an overcast sky">
-              <h3>3 children and a teacher were killed in Oregon elementary school shooting, police say. The teen shooter is also dead</h3>
-              <span class="meta"><span>US</span></span>
-            </a>
-          </li>
-          <li>
-            <a href="articles/2026-10-16-world-eu-summit-zelenskyy.html"><img class="mostread-thumb-img" src="images/2026-10-16-world-eu-summit-zelenskyy.jpg" alt="A modern European government building in Brussels with a row of plain blue flags outside and people in suits walking across a wide plaza">
-              <h3>EU leaders back Zelenskyy at Brussels summit as US pressure grows</h3>
-              <span class="meta"><span>World</span></span>
-            </a>
-          </li>
-          <li>
-            <a href="articles/2026-10-16-politics-gop-voting-restrictions.html"><img class="mostread-thumb-img" src="images/2026-10-16-politics-gop-voting-restrictions.jpg" alt="Voters waiting in line outside a brick polling place with a US flag on a clear morning">
-              <h3>GOP-led states have made it harder to vote before the midterms</h3>
-              <span class="meta"><span>Politics</span></span>
-            </a>
-          </li>
-          <li>
-            <a href="articles/2026-10-16-business-coreweave-ai-debt.html"><img class="mostread-thumb-img" src="images/2026-10-16-business-coreweave-ai-debt.jpg" alt="A long corridor in a data center with rows of server racks and small indicator lights">
-              <h3>Cost to insure CoreWeave debt jumps past 1,000 points as AI debt worries grow</h3>
-              <span class="meta"><span>Business</span></span>
-            </a>
-          </li>
-        </ol>
-      </aside>
-    </div>
 
   </main>
 
