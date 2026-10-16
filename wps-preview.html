@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WPS - What People Say | US + World News</title>
+  <meta name="description" content="WPS - What People Say. US news first, then big international news, with top public reactions.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WPS - What People Say | US + World News">
+  <meta property="og:description" content="US news first, then big international news, with top public reactions.">
+  <style>/* ==========================================================================
+   WPS - What People Say
+   Pure black / white only. Static HTML + CSS. No JavaScript, no external
+   requests, no trackers, no web fonts.
+   Mobile-first, BBC-style. Order below follows page order:
+   tokens -> base -> utilities -> header -> ads -> hero -> text-only ->
+   rail layout -> sections -> audio -> footer -> article -> desktop -> print
+   ========================================================================== */
+
+/* ---------- 1. Tokens (black / white family only) ---------- */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --ink: #222222;          /* secondary body text */
+  --meta: #555555;          /* timestamps, tags, captions (7:1 on white) */
+  --hair: #e5e5e5;          /* hairline dividers */
+  --light: #f5f5f5;         /* ad-box background */
+  --placeholder: #e5e5e5;   /* image placeholder background */
+  --placeholder-text: #555555;
+  --footer-muted: #d9d9d9;  /* legal text on black footer (11:1) */
+}
+
+/* ---------- 2. Reset / base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Visible keyboard focus. White outline on the black footer. */
+:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+.site-footer :focus-visible { outline-color: var(--white); }
+
+/* ---------- 3. Utilities ---------- */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 12px;
+  font-weight: 700;
+  z-index: 100;
+}
+.skip-link:focus { top: 12px; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--meta);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 14px; }
+
+/* ---------- 4. Header / nav ---------- */
+.site-header {
+  border-bottom: 1px solid var(--black);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 10;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-left { display: flex; gap: 18px; align-items: center; }
+
+.header-icon { font-size: 22px; line-height: 1; padding: 4px; }
+
+.logo { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.logo-boxes { display: flex; gap: 3px; }
+.logo-boxes span {
+  background: var(--black);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1;
+  padding: 4px 7px;
+}
+.logo-tag {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.header-right { font-size: 22px; }
+
+.main-nav {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 8px 14px;
+  border-top: 1px solid var(--hair);
+  max-width: 1200px;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+.main-nav a { font-size: 14px; font-weight: 700; }
+.main-nav a.active,
+.main-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- 5. Advertisement blocks ---------- */
+.ad-block {
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  padding: 14px 0;
+  margin: 18px 0;
+  text-align: center;
+}
+.ad-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--meta);
+  text-transform: uppercase;
+  text-align: right;
+}
+.ad-box {
+  background: var(--light);
+  border: 1px solid var(--hair);
+  padding: 28px 14px;
+  font-size: 14px;
+  color: var(--meta);
+}
+
+/* ---------- 6. Hero (mobile: stacked; desktop: 2-column) ---------- */
+.hero-layout { display: grid; gap: 0; }
+
+.hero { padding: 16px 0 8px; border-bottom: 1px solid var(--black); }
+
+.hero-img,
+.featured-thumb,
+.audio-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--placeholder);
+  color: var(--placeholder-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  padding: 12px;
+}
+
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 12px 0 8px;
+}
+.hero p { font-size: 16px; color: var(--ink); margin-bottom: 8px; }
+
+/* Hero side stack: 4 compact stories on desktop, stacked on mobile. */
+.hero-side { padding: 14px 0; display: grid; gap: 0; }
+
+.side-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hair);
+  align-items: flex-start;
+  min-width: 0;
+}
+.side-thumb {
+  flex: 0 0 38%;
+  aspect-ratio: 16 / 10;
+  background: var(--placeholder);
+  color: var(--placeholder-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+}
+.side-thumb.video::after {
+  content: "\25B6";
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 12px;
+  padding: 4px 8px;
+}
+.side-body { flex: 1; min-width: 0; }
+.side-title {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+/* ---------- 7. Text-only cards ---------- */
+.text-only-list { padding: 0; }
+
+.text-only {
+  display: block;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hair);
+  min-width: 0;
+}
+.text-only h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.text-only p { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+
+/* ---------- 8. Rail layout (Most Read side rail on desktop) ---------- */
+.layout-with-rail { display: grid; gap: 0; }
+
+/* ---------- 9. Sections: 1 large + 2-3 small ---------- */
+.section { padding: 18px 0; }
+
+.section-header {
+  border-top: 2px solid var(--black);
+  padding-top: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.section-header h2 { font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
+.section-header a { font-size: 13px; font-weight: 700; white-space: nowrap; }
+
+.section-grid { display: grid; gap: 16px; }
+
+.featured-card { display: block; min-width: 0; }
+.featured-thumb { margin-bottom: 8px; }
+.featured-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.featured-card p { font-size: 14px; color: var(--ink); margin-bottom: 6px; }
+
+.section-small { display: grid; gap: 0; }
+
+.small-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--hair);
+  align-items: flex-start;
+  min-width: 0;
+}
+.small-card:first-child { border-top: 0; padding-top: 0; }
+.small-thumb {
+  flex: 0 0 100px;
+  aspect-ratio: 16 / 10;
+  background: var(--placeholder);
+  color: var(--placeholder-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.small-body { flex: 1; min-width: 0; }
+.small-body h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+/* ---------- 10. Most Read (numbered list; rail on desktop) ---------- */
+.most-read { padding: 18px 0; }
+.most-read ol { list-style: none; counter-reset: mr; }
+.most-read li {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hair);
+  align-items: flex-start;
+  min-width: 0;
+}
+.most-read li::before {
+  counter-increment: mr;
+  content: counter(mr);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  min-width: 36px;
+}
+.most-read h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+/* ---------- 11. Recommended Audio (horizontal scroll) ---------- */
+.audio-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+}
+.audio-card { flex: 0 0 78%; scroll-snap-align: start; display: block; min-width: 0; }
+.audio-thumb { margin-bottom: 8px; }
+.audio-show { font-size: 13px; color: var(--meta); }
+.audio-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 4px 0 8px;
+}
+.save-row { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--meta); }
+.save-label {
+  border: 1px solid var(--black);
+  background: var(--white);
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+/* ---------- 12. Footer ---------- */
+.site-footer { background: var(--black); color: var(--white); margin-top: 24px; padding: 28px 14px; }
+.site-footer .inner { max-width: 1200px; margin: 0 auto; }
+.footer-logo { display: flex; gap: 3px; margin-bottom: 14px; }
+.footer-logo span {
+  background: var(--white);
+  color: var(--black);
+  font-weight: 900;
+  font-size: 20px;
+  padding: 4px 7px;
+}
+.footer-nav { display: flex; flex-wrap: wrap; gap: 14px; margin: 14px 0; font-size: 14px; }
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--footer-muted);
+  margin-top: 14px;
+}
+.footer-copyright { margin-top: 12px; font-size: 12px; color: var(--footer-muted); }
+
+/* ---------- 13. Article page ---------- */
+.article { max-width: 760px; margin: 0 auto; padding: 16px 14px; }
+.article h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  line-height: 1.15;
+  margin: 12px 0 10px;
+}
+.article .byline { font-weight: 700; font-size: 14px; margin: 8px 0; }
+.article .source-note { font-size: 13px; color: var(--meta); margin: 8px 0; }
+.article figure { margin: 12px 0; }
+.article figcaption { font-size: 13px; color: var(--meta); margin-top: 6px; }
+.article p.body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 12px 0;
+}
+.article .back-link { display: inline-block; margin-top: 16px; font-weight: 700; }
+
+/* What People Say box */
+.wps-box { border: 2px solid var(--black); padding: 16px; margin: 22px 0; }
+.wps-box h2 { font-size: 18px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.wps-note { font-size: 13px; color: var(--meta); margin-bottom: 4px; }
+.wps-comment { border-bottom: 1px solid var(--hair); padding: 12px 0; }
+.wps-comment:last-child { border-bottom: 0; }
+.wps-comment .who { font-size: 13px; color: var(--meta); margin-bottom: 4px; }
+.wps-comment p { font-size: 15px; }
+
+/* Related */
+.related h2 {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 2px solid var(--black);
+  padding-top: 8px;
+  margin: 20px 0 12px;
+}
+.related ul { list-style: none; }
+.related li { padding: 8px 0; border-bottom: 1px solid var(--hair); }
+.related li:last-child { border-bottom: 0; }
+
+/* ---------- 14. Desktop (>= 760px) ---------- */
+@media (min-width: 760px) {
+  .hero h1 { font-size: 44px; }
+
+  /* Desktop hero: large left + 4 small right stack. */
+  .hero-layout { grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+  .hero { border-bottom: 0; }
+  .hero-side { padding-top: 16px; }
+  .side-thumb { flex-basis: 96px; }
+
+  /* Desktop rail: content left, Most Read rail right. */
+  .layout-with-rail { grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+  .most-read { position: sticky; top: 110px; }
+
+  /* Desktop sections: 1 large left + small stack right. */
+  .section-grid { grid-template-columns: 1.3fr 1fr; align-items: start; }
+  .featured-card h3 { font-size: 24px; }
+
+  .audio-card { flex-basis: 38%; }
+}
+
+/* ---------- 15. Print ---------- */
+@media print {
+  .site-header { position: static; }
+  .main-nav, .ad-block, .audio-scroll, .save-label { display: none; }
+  body { background: var(--white); color: var(--black); }
+  a { text-decoration: none; }
+}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-row">
+      <div class="header-left">
+        <a class="header-icon" href="#main-nav" aria-label="Jump to sections">&#9776;</a>
+        <a class="header-icon" href="#main-nav" aria-label="Browse sections">&#128269;</a>
+      </div>
+      <a class="logo" href="index.html" aria-label="WPS home - What People Say">
+        <span class="logo-boxes"><span>W</span><span>P</span><span>S</span></span>
+        <span class="logo-tag">What People Say</span>
+      </a>
+      <div class="header-right">
+        <a class="header-icon" href="#footer" aria-label="About WPS">&#128100;</a>
+      </div>
+    </div>
+    <nav class="main-nav" id="main-nav" aria-label="Sections">
+      <a href="index.html" aria-current="page" class="active">Home</a>
+      <a href="#us">US</a>
+      <a href="#world">World</a>
+      <a href="#politics">Politics</a>
+      <a href="#business">Business</a>
+      <a href="#technology">Technology</a>
+      <a href="#culture">Culture</a>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="ad-block" role="complementary" aria-label="Advertisement">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-box">Advertisement placeholder</div>
+    </div>
+
+    <!-- HERO: mobile stacked; desktop large left + 4 small right stack -->
+    <div class="hero-layout">
+      <section class="hero" aria-labelledby="hero-title">
+        <a href="articles/sample.html">
+          <div class="hero-img" role="img" aria-label="Hero image placeholder">Hero image placeholder</div>
+          <h1 id="hero-title">Sample top story: US and world leaders discuss major policy update</h1>
+          <p>Short summary in our own words. Facts only, no copy, no commentary. Full story inside.</p>
+          <div class="meta">
+            <time datetime="2026-10-16">2 hrs ago</time>
+            <span aria-hidden="true">|</span>
+            <span>US</span>
+          </div>
+        </a>
+      </section>
+
+      <aside class="hero-side" aria-label="More top stories">
+        <a class="side-card" href="articles/sample.html">
+          <span class="side-thumb video" role="img" aria-label="Video thumbnail placeholder">&#9654;</span>
+          <span class="side-body">
+            <span class="side-title">Video: How the top story unfolded, in two minutes</span>
+            <span class="meta"><span>3 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
+          </span>
+        </a>
+        <a class="side-card" href="articles/sample.html">
+          <span class="side-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+          <span class="side-body">
+            <span class="side-title">Second major story of the day</span>
+            <span class="meta"><span>4 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+          </span>
+        </a>
+        <a class="side-card" href="articles/sample.html">
+          <span class="side-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+          <span class="side-body">
+            <span class="side-title">Third story: what happened and why it matters</span>
+            <span class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
+          </span>
+        </a>
+        <a class="side-card" href="articles/sample.html">
+          <span class="side-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+          <span class="side-body">
+            <span class="side-title">Fourth story from the international desk</span>
+            <span class="meta"><span>6 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+          </span>
+        </a>
+      </aside>
+    </div>
+
+    <!-- TEXT-ONLY CARDS -->
+    <section class="text-only-list" aria-label="More headlines">
+      <a class="text-only" href="articles/sample.html">
+        <h2>Text-only card: Fifth big story, headline + summary only</h2>
+        <p>One-line summary in our own words. Click to open the full article.</p>
+        <div class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>US</span></div>
+      </a>
+      <a class="text-only" href="articles/sample.html">
+        <h2>Text-only card: Sixth story, headline + summary only</h2>
+        <p>One-line summary in our own words. Click to open the full article.</p>
+        <div class="meta"><span>6 hrs ago</span><span aria-hidden="true">|</span><span>World</span></div>
+      </a>
+    </section>
+
+    <div class="ad-block" role="complementary" aria-label="Advertisement">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-box">Advertisement placeholder</div>
+    </div>
+
+    <!-- CONTENT + MOST READ RAIL: mobile stacked; desktop content left + rail right -->
+    <div class="layout-with-rail">
+      <div class="content-main">
+
+        <!-- US SECTION: 1 large + 3 small -->
+        <section class="section" id="us" aria-labelledby="us-title">
+          <div class="section-header">
+            <h2 id="us-title">US News</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="US featured image placeholder">IMG</span>
+              <h3>US story one: the day&rsquo;s biggest US development</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>1 hr ago</span><span aria-hidden="true">|</span><span>US</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>US story two</h3>
+                  <span class="meta"><span>2 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>US story three</h3>
+                  <span class="meta"><span>3 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>US story four</h3>
+                  <span class="meta"><span>4 hrs ago</span><span aria-hidden="true">|</span><span>US</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- WORLD SECTION: 1 large + 3 small -->
+        <section class="section" id="world" aria-labelledby="world-title">
+          <div class="section-header">
+            <h2 id="world-title">World - Big News</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="World featured image placeholder">IMG</span>
+              <h3>World story one: the day&rsquo;s biggest international development</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>2 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>World story two</h3>
+                  <span class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>World story three</h3>
+                  <span class="meta"><span>7 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>World story four</h3>
+                  <span class="meta"><span>9 hrs ago</span><span aria-hidden="true">|</span><span>World</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- POLITICS SECTION: 1 large + 2 small -->
+        <section class="section" id="politics" aria-labelledby="politics-title">
+          <div class="section-header">
+            <h2 id="politics-title">Politics</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="Politics featured image placeholder">IMG</span>
+              <h3>Politics story one</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>2 hrs ago</span><span aria-hidden="true">|</span><span>Politics</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Politics story two</h3>
+                  <span class="meta"><span>4 hrs ago</span><span aria-hidden="true">|</span><span>Politics</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Politics story three</h3>
+                  <span class="meta"><span>6 hrs ago</span><span aria-hidden="true">|</span><span>Politics</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- BUSINESS SECTION: 1 large + 2 small -->
+        <section class="section" id="business" aria-labelledby="business-title">
+          <div class="section-header">
+            <h2 id="business-title">Business</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="Business featured image placeholder">IMG</span>
+              <h3>Business story one</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>3 hrs ago</span><span aria-hidden="true">|</span><span>Business</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Business story two</h3>
+                  <span class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>Business</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Business story three</h3>
+                  <span class="meta"><span>8 hrs ago</span><span aria-hidden="true">|</span><span>Business</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- TECHNOLOGY SECTION: 1 large + 2 small -->
+        <section class="section" id="technology" aria-labelledby="technology-title">
+          <div class="section-header">
+            <h2 id="technology-title">Technology</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="Technology featured image placeholder">IMG</span>
+              <h3>Technology story one</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>2 hrs ago</span><span aria-hidden="true">|</span><span>Technology</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Technology story two</h3>
+                  <span class="meta"><span>4 hrs ago</span><span aria-hidden="true">|</span><span>Technology</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Technology story three</h3>
+                  <span class="meta"><span>6 hrs ago</span><span aria-hidden="true">|</span><span>Technology</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- CULTURE SECTION: 1 large + 2 small -->
+        <section class="section" id="culture" aria-labelledby="culture-title">
+          <div class="section-header">
+            <h2 id="culture-title">Culture</h2>
+            <a href="articles/sample.html">See more &gt;</a>
+          </div>
+          <div class="section-grid">
+            <a class="featured-card" href="articles/sample.html">
+              <span class="featured-thumb" role="img" aria-label="Culture featured image placeholder">IMG</span>
+              <h3>Culture story one</h3>
+              <p>Short summary in our own words.</p>
+              <span class="meta"><span>3 hrs ago</span><span aria-hidden="true">|</span><span>Culture</span></span>
+            </a>
+            <div class="section-small">
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Culture story two</h3>
+                  <span class="meta"><span>5 hrs ago</span><span aria-hidden="true">|</span><span>Culture</span></span>
+                </span>
+              </a>
+              <a class="small-card" href="articles/sample.html">
+                <span class="small-thumb" role="img" aria-label="Image thumbnail placeholder">IMG</span>
+                <span class="small-body">
+                  <h3>Culture story three</h3>
+                  <span class="meta"><span>7 hrs ago</span><span aria-hidden="true">|</span><span>Culture</span></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- MOST READ: numbered list; side rail on desktop -->
+      <aside class="most-read" aria-labelledby="most-read-title">
+        <div class="section-header">
+          <h2 id="most-read-title">Most Read</h2>
+        </div>
+        <ol>
+          <li>
+            <a href="articles/sample.html">
+              <h3>Most read one</h3>
+              <span class="meta"><span>US</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/sample.html">
+              <h3>Most read two</h3>
+              <span class="meta"><span>World</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/sample.html">
+              <h3>Most read three</h3>
+              <span class="meta"><span>US</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/sample.html">
+              <h3>Most read four</h3>
+              <span class="meta"><span>World</span></span>
+            </a>
+          </li>
+        </ol>
+      </aside>
+    </div>
+
+    <!-- RECOMMENDED AUDIO: horizontal scroll -->
+    <section class="section" aria-labelledby="audio-title">
+      <div class="section-header">
+        <h2 id="audio-title">Recommended Audio &gt;</h2>
+      </div>
+      <div class="audio-scroll">
+        <a class="audio-card" href="articles/sample.html">
+          <span class="audio-thumb" role="img" aria-label="Audio thumbnail placeholder">Audio</span>
+          <span class="audio-show">The Global Story</span>
+          <h3>Audio story one</h3>
+          <span class="save-row"><span class="save-label">Save</span><span>27 mins</span></span>
+        </a>
+        <a class="audio-card" href="articles/sample.html">
+          <span class="audio-thumb" role="img" aria-label="Audio thumbnail placeholder">Audio</span>
+          <span class="audio-show">Global News Podcast</span>
+          <h3>Audio story two</h3>
+          <span class="save-row"><span class="save-label">Save</span><span>32 mins</span></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="inner">
+      <div class="footer-logo" aria-label="WPS"><span>W</span><span>P</span><span>S</span></div>
+      <p>What People Say - US news first, then big international news, with top public reactions.</p>
+      <nav class="footer-nav" aria-label="Footer sections">
+        <a href="index.html">Home</a>
+        <a href="#us">US</a>
+        <a href="#world">World</a>
+        <a href="#politics">Politics</a>
+        <a href="#business">Business</a>
+        <a href="#technology">Technology</a>
+        <a href="#culture">Culture</a>
+      </nav>
+      <p class="footer-legal">
+        <span>Terms of Use</span>
+        <span>Privacy Policy</span>
+        <span>Cookies</span>
+        <span>About WPS</span>
+        <span>Contact</span>
+      </p>
+      <p class="footer-copyright">&copy; 2026 WPS - What People Say. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
