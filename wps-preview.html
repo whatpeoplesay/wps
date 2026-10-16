@@ -495,6 +495,18 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
 /* ---------- Read More: first paragraph visible, rest inside details ---------- */
 .wps-read-more { margin: 0 0 16px; }
 .wps-read-more > summary { font-weight: 700; color: var(--black); cursor: pointer; margin: 8px 0; }
+
+/* Most Read: smaller titles, clamped to 4 lines, aligned with the thumbnail. */
+.most-read h3 {
+  font-size: 13px;
+  line-height: 1.35;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-clamp: 4;
+  overflow: hidden;
+}
 </style>
 </head>
 <body>
