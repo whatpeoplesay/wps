@@ -516,3 +516,6 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
   .category-body h2 { font-size: 16px; }
   .category-body p { font-size: 14px; }
 }
+
+/* Category pages: same side limits as the article page (760px, centered). */
+.category-page { max-width: 760px; margin: 0 auto; padding: 18px 14px 32px; }
