@@ -476,3 +476,7 @@ img.mostread-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obj
 .related li a { display: flex; gap: 10px; align-items: flex-start; }
 img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
 @media (min-width: 760px) { img.side-thumb-img { flex-basis: 96px; width: 96px; } }
+
+/* ---------- Read More: first paragraph visible, rest inside details ---------- */
+.wps-read-more { margin: 0 0 16px; }
+.wps-read-more > summary { font-weight: 700; color: var(--black); cursor: pointer; margin: 8px 0; }
