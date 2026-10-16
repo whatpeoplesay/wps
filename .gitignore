@@ -1,0 +1,9 @@
+# Never commit secrets. WPS has no secrets, no keys, no credentials.
+.env
+.env.*
+*.env
+*credentials*
+*secret*
+*.pem
+*.key
+id_rsa*
