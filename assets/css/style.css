@@ -412,7 +412,7 @@ img.hero-img {
 
 /* Facebook-style comment cards: one separate card per comment, so comments
    never run together. Black / white / grey only, no external icons. */
-.wps-comment-card { border: 1px solid #d9d9d9; border-top: 2px solid var(--black); padding: 14px; margin: 14px 0; background: #f2f2f2; }
+.wps-comment-card { border: 1px solid #d9d9d9; border-top: 1px solid #d9d9d9; padding: 14px; margin: 14px 0; background: #f2f2f2; }
 .wps-comment-card:last-child { margin-bottom: 0; }
 .wps-comment-head { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
 .wps-avatar { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; line-height: 1; }
