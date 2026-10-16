@@ -176,6 +176,13 @@ a:hover { text-decoration: underline; }
   padding: 12px;
 }
 
+/* Real article/hero photos use the same slot without placeholder padding. */
+img.hero-img {
+  display: block;
+  padding: 0;
+  object-fit: cover;
+}
+
 .hero h1 {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 30px;
