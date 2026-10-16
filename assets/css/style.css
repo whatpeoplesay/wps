@@ -492,3 +492,8 @@ img.related-thumb-img { flex: 0 0 72px; width: 72px; aspect-ratio: 16 / 10; obje
   line-clamp: 4;
   overflow: hidden;
 }
+
+/* Most Read: no ranking numbers — thumbnails move to the left edge. */
+.most-read li::before {
+  display: none;
+}
