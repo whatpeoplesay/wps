@@ -410,6 +410,20 @@ img.hero-img {
 .wps-comment .who { font-size: 13px; color: var(--meta); margin-bottom: 4px; }
 .wps-comment p { font-size: 15px; }
 
+/* Facebook-style comment cards: one separate card per comment, so comments
+   never run together. Black / white / grey only, no external icons. */
+.wps-comment-card { border: 1px solid var(--hair); border-top: 2px solid var(--black); padding: 14px; margin: 14px 0; background: var(--white); }
+.wps-comment-card:last-child { margin-bottom: 0; }
+.wps-comment-head { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.wps-avatar { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; line-height: 1; }
+.wps-comment-meta { display: flex; flex-direction: column; min-width: 0; }
+.wps-comment-name { font-size: 15px; line-height: 1.3; }
+.wps-comment-platform { font-size: 12px; color: var(--meta); }
+.wps-comment-text { font-size: 15px; line-height: 1.6; margin: 0 0 10px; }
+.wps-comment-foot { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 13px; color: var(--meta); border-top: 1px solid var(--hair); padding-top: 10px; }
+.wps-comment-actions { font-weight: 700; color: var(--black); }
+.wps-comment-link { font-weight: 700; color: var(--black); margin-left: auto; }
+
 /* Related */
 .related h2 {
   font-size: 18px;
